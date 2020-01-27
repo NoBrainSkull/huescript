@@ -1,0 +1,10 @@
+{application,huescript,
+             [{applications,[kernel,stdlib,elixir,logger,poison,httpoison]},
+              {description,"huescript"},
+              {modules,['Elixir.Huescript.Bridge',
+                        'Elixir.Huescript.Http.Request',
+                        'Elixir.Huescript.Light',
+                        'Elixir.Huescript.Light.State',
+                        'Elixir.Huescript.Main']},
+              {registered,[]},
+              {vsn,"0.1.0"}]}.
