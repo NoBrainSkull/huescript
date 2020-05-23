@@ -5,9 +5,10 @@ defmodule Huescript.Http.Request do
 
   def get(route), do: get(route, [])
   def get(route, params) do
-    params
-      |> Enum.reduce(base_url(route), fn param, url -> add_query_param(url, param) end)
-      |> HTTPoison.get
+    prepared_url = params |> Enum.reduce(base_url(route), fn param, url -> add_query_param(url, param) end)
+    with {:ok, %{status_code: 200} = response} <- HTTPoison.get(prepared_url),
+    {:ok, parsed} <- Poison.decode(response.body),
+    do: parsed
   end
 
   def post(route, body \\ nil), do: HTTPoison.post(base_url(route), body)
